@@ -69,7 +69,6 @@ def main(
                     delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE
                 ),
             )
-            # print(f" [x] {contact}")
 
     connection.close()
 

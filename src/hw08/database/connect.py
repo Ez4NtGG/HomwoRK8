@@ -8,7 +8,6 @@ MongoDB_USER = os.getenv('MongoDB_USER')
 if not MongoDB_USER:
     env_path = Path(__file__).parent.parent.parent.parent.joinpath(".env")
     if env_path.is_file:
-        # print(env_path)
         load_dotenv(env_path)
 
 MongoDB_USER = os.getenv('MongoDB_USER')
@@ -16,7 +15,6 @@ MongoDB_PASSWORD = os.getenv('MongoDB_PASSWORD')
 MongoDB_HOST = os.getenv('MongoDB_HOST')
 MongoDB_NAME = os.getenv('MongoDB_NAME')
 
-#client = None
 connect_state = False
 def connect_db():
     global connect_state
@@ -35,4 +33,3 @@ def connect_db():
         print("not defined MongoDB_USER from enviroment. Database not conected")
     return connect_state
 
-    # print(f"{URI=}")

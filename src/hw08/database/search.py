@@ -49,7 +49,6 @@ def find_by_tag(tag_str: str) -> list:
     result = []
     tags_full = find_tags(tag_str)
     if tags_full:
-        # print(tags_full)
         records = Quotes.objects(tags__in=tags_full)
         for record in records:
             r_dict = record.to_mongo().to_dict()
@@ -65,5 +64,4 @@ if __name__ == "__main__":
     from hw08.database.connect import connect_db
 
     if connect_db():
-        # print(find_by_name("eins"))
         print(find_by_tag("li,succ"))

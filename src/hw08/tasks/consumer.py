@@ -9,9 +9,7 @@ from hw08.database.models import Contacts, PreferTypes
 
 
 def sending_task(message):
-    # print(f"email_task: {message=}")
     id = message.get("contact_id")
-    # prefer_type = message.get("prefer")
     if id:
         contact = Contacts.objects(id=id).first()
     if  contact:  
@@ -25,16 +23,11 @@ def sending_task(message):
                 print("Prefer type is unknown, use email by default")
                 email_task(contact)
 
-    # print(f"sending_task {prefer_type=}")
 
     return
 
 
 def email_task(contact):
-    # print(f"email_task: {message=}")
-    # id = message.get("contact_id")
-    # if id:
-    #     contact = Contacts.objects(id=id).first()
     if contact:
         if not contact.done:
             print(f"Name: {contact.fullname} ")
@@ -47,10 +40,6 @@ def email_task(contact):
 
 
 def sms_task(contact):
-    # print(f"email_task: {message=}")
-    # id = message.get("contact_id")
-    # if id:
-    #     contact = Contacts.objects(id=id).first()
     if contact:
         if not contact.done:
             print(f"Name: {contact.fullname} ")

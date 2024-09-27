@@ -33,7 +33,6 @@ def seeds(debug: bool = False):
         for author in tqdm(so, total=len(so)):
             rec = Authors(**author).save()
             authors_id[author.get("fullname")] = rec.id
-            # print(f"added {seed_object} id: {rec.id} ({rec.fullname})")
 
     seed_object = "quotes"
     print(f"Add {seed_object}...")
@@ -46,9 +45,7 @@ def seeds(debug: bool = False):
             if author_id:
                 quote["author"] = author_id
                 rec = Quotes(**quote).save()
-                # print(f"added {seed_object} id: {rec.id}")
                 author_by_id = Authors.objects(id=author_id).first()
-                # print(f"added quote of quote.author {author}, author id [{author_id}] = ({author_by_id.fullname}) ")
 
     if debug:
         authors = Authors.objects()
@@ -61,8 +58,6 @@ def seeds(debug: bool = False):
             print("-------------------")
             print(record.to_mongo().to_dict())
 
-            # tags = [tag.name for tag in note.tags]
-            # print(f"id: {note.id} name: {note.name} date: {note.created} records: {records} tags: {tags}")
 
         find1 = Authors.objects(fullname="Steve Martin").delete()
         print("deleted", find1)
@@ -82,13 +77,6 @@ def seed_prefer_types() -> list[str]:
 
 
 def seed_contacts(max_records: int = 100, preffer_type: str = "type_email", drop: bool = True) -> list[str]:
-    # class Contacts(Document):
-    # fullname = StringField()
-    # email = StringField()
-    # phone =  StringField()
-    # address = StringField()
-    # birthday = DateField()
-    # done = BooleanField(default=False)
 
     fake = Faker("uk-UA")
     types=seed_prefer_types()
@@ -111,23 +99,8 @@ def seed_contacts(max_records: int = 100, preffer_type: str = "type_email", drop
         result.append(str(obj_id))
     return result
 
-
-# # спочатку - створити об'єкт Tag
-# tag = Tag(name='Purchases')
-# # потім - створення об'єктів Record
-# record1 = Record(description='Buying sausage')
-# record2 = Record(description='Buying milk')
-# record3 = Record(description='Buying oil')
-# #  Останнє - створюємо об'єкт Note і зберігаємо його
-# Notes(name='Shopping', records=[record1, record2, record3], tags=[tag, ]).save()
-
-# Notes(name='Going to the movies', records=[Record(description='Went to see the Avengers'), ], tags=[Tag(name='Fun'), ]).save()
-
-
 if __name__ == "__main__":
     from hw08.database.connect import connect_db
 
     if connect_db():
-        # seeds()
-        # print(seed_prefer_types())
         print(seed_contacts(10))

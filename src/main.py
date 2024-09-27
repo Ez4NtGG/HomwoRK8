@@ -25,9 +25,6 @@ def main(seed_on: bool = True):
     if connect_db():
         if seed_on:
             seeds()
-            # seed_contacts()
-
-        ##console search
 
         while True:
             try:
